@@ -200,6 +200,9 @@
     /* ── SECTION LABEL ── */
     .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; display: flex; align-items: center; gap: 14px; }
     .section-label::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+    /* Centered variant — line on both sides */
+    .section-label-center { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 22px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+    .section-label-center::before, .section-label-center::after { content: ''; width: 28px; height: 1px; background: var(--amber); }
 
     /* ── ABOUT INLINE PHOTO (mobile only) ── */
     .about-inline-photo { display: none; }
@@ -550,7 +553,7 @@
 <section class="gallery" id="gallery" aria-label="Session gallery">
   <div class="gallery-header">
     <div>
-      <div class="section-label">In the Field</div>
+      <div class="section-label-center">In the Field</div>
       <h2 class="gallery-heading">Every session,<br><em>delivered to you.</em></h2>
     </div>
     <div class="gallery-controls">
@@ -632,7 +635,7 @@
 <section class="services" id="services">
   <div class="services-top">
     <div>
-      <div class="section-label">Why It Works</div>
+      <div class="section-label-center">Why It Works</div>
       <h2 class="services-heading">What your body<br><em>gains.</em></h2>
     </div>
     <p class="services-sub">Six outcomes clients notice from the very first appointment.</p>
