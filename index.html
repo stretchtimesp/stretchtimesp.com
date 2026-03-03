@@ -228,7 +228,7 @@
     .gallery-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; }
     .gallery-heading em { font-style: italic; color: var(--amber-light); }
     .gallery-controls { display: flex; align-items: center; gap: 16px; }
-    .gallery-btn { width: 44px; height: 44px; border: 1px solid rgba(201,145,58,0.3); background: none; cursor: pointer; color: var(--amber-light); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s; }
+    .gallery-btn { width: 44px; height: 44px; border: 1px solid rgba(201,145,58,0.3); background: none; cursor: pointer; color: var(--amber-light); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
     .gallery-btn:hover { background: rgba(201,145,58,0.1); border-color: var(--amber); }
     .gallery-dots { display: flex; gap: 8px; align-items: center; }
     .gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-dim); transition: background 0.3s, transform 0.3s; cursor: pointer; }
@@ -387,6 +387,7 @@
       .gallery-heading { font-size: 2rem; }
       .gallery-controls { align-self: center; }
       .gallery-header .section-label { justify-content: center; }
+      .gallery-btn { display: none; }
       .gallery-slide { width: 85vw; }
       .gallery-slide:first-child { margin-left: 24px; }
       .gallery-progress { margin: 24px 24px 0; }
@@ -799,17 +800,27 @@
     function prev() { goTo(current - 1); }
 
     // Use onclick directly to avoid any event bubbling issues
-    // Handle both touch and click to prevent iOS scroll jump
-    function handleNext(e) { e.preventDefault(); e.stopPropagation(); clearAuto(); next(); startAuto(); return false; }
-    function handlePrev(e) { e.preventDefault(); e.stopPropagation(); clearAuto(); prev(); startAuto(); return false; }
-
     const btnNext = document.getElementById('galleryNext');
     const btnPrev = document.getElementById('galleryPrev');
 
-    btnNext.addEventListener('touchstart', handleNext, { passive: false });
-    btnNext.addEventListener('click', handleNext);
-    btnPrev.addEventListener('touchstart', handlePrev, { passive: false });
-    btnPrev.addEventListener('click', handlePrev);
+    // Use touchend to avoid iOS scroll-to-focus behavior; blur immediately after
+    btnNext.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.blur();
+      clearAuto(); next(); startAuto();
+    }, { passive: false });
+
+    btnPrev.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.blur();
+      clearAuto(); prev(); startAuto();
+    }, { passive: false });
+
+    // Desktop click
+    btnNext.addEventListener('click', function(e) { e.preventDefault(); clearAuto(); next(); startAuto(); });
+    btnPrev.addEventListener('click', function(e) { e.preventDefault(); clearAuto(); prev(); startAuto(); });
 
     function resetProgress() {
       progressBar.style.transition = 'none';
