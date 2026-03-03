@@ -228,8 +228,8 @@
     /* ── PHOTO GALLERY ── */
     .gallery { padding: 70px 0; background: var(--dark2); position: relative; overflow: hidden; }
     .gallery::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(201,145,58,0.25) 50%, transparent); }
-    .gallery-header { padding: 0 60px; display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
-    .gallery-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; }
+    .gallery-header { padding: 0 60px; display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 48px; gap: 20px; }
+    .gallery-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.1; text-align: center; }
     .gallery-heading em { font-style: italic; color: var(--amber-light); }
     .gallery-controls { display: flex; align-items: center; gap: 16px; }
     .gallery-btn { width: 44px; height: 44px; border: 1px solid rgba(201,145,58,0.3); background: none; cursor: pointer; color: var(--amber-light); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: background 0.25s, border-color 0.25s; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
@@ -270,10 +270,10 @@
     /* ── SERVICES ── */
     .services { padding: 70px 60px 80px; background: var(--black); position: relative; }
     .services::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(201,145,58,0.25) 50%, transparent); }
-    .services-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; }
+    .services-top { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 48px; gap: 12px; }
     .services-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 300; line-height: 1.1; }
     .services-heading em { font-style: italic; color: var(--amber-light); }
-    .services-sub { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); max-width: 250px; line-height: 1.7; text-align: right; }
+    .services-sub { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); max-width: 350px; line-height: 1.7; text-align: center; }
     .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
     .benefit-card { background: var(--dark2); padding: 42px 34px; position: relative; overflow: hidden; transition: background 0.3s; }
     .benefit-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
@@ -407,6 +407,7 @@
       .services { padding: 44px 24px 52px; }
       .services-top { flex-direction: column; align-items: flex-start; gap: 14px; }
       .services-sub { text-align: left; max-width: 100%; }
+      .services-top .section-label { justify-content: flex-start; }
       .benefits-grid { grid-template-columns: 1fr; }
       .benefit-card { padding: 34px 26px; }
 
