@@ -874,10 +874,7 @@
       progressBar.style.width = '0%';
     }
 
-    // Pause on hover (desktop)
-    const gallerySection = document.getElementById('gallery');
-    gallerySection.addEventListener('mouseenter', clearAuto);
-    gallerySection.addEventListener('mouseleave', startAuto);
+    // No pause on hover — gallery always auto-advances
 
     // Swipe on mobile — only horizontal swipes, ignore vertical scrolling
     let touchStartX = 0;
