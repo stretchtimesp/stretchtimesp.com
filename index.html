@@ -367,9 +367,9 @@
         pointer-events: auto;
       }
       .hero-sub { max-width: 100%; }
-      .hero-cta { flex-direction: column; align-items: stretch; gap: 14px; text-align: center; }
-      .hero-cta .btn-primary { text-align: center; padding: 18px; }
-      .hero-cta .btn-ghost { display: block; text-align: center; width: 100%; padding: 8px 0; }
+      .hero-cta { flex-direction: column; align-items: stretch; gap: 14px; }
+      .hero-cta .btn-primary { display: block; width: 100%; text-align: center; padding: 18px; box-sizing: border-box; }
+      .hero-cta .btn-ghost { display: block !important; width: 100%; text-align: center !important; padding: 8px 0; box-sizing: border-box; }
       /* Show image as full-bleed background on mobile */
       .hero-right {
         display: block;
@@ -488,7 +488,7 @@
     <p class="hero-sub">Expert assisted stretching delivered to your home. Guided by a Tony Award-winning performer, Army combat medic, and NASM-certified mobility specialist.</p>
     <div class="hero-cta">
       <button class="btn-primary" onclick="openModal()">Book a Session</button>
-      <a href="#about" class="btn-ghost" onclick="this.blur()">Meet Roberto &nbsp;↓</a>
+      <a href="#about" class="btn-ghost" onclick="this.blur()">Meet Roberto ↓</a>
     </div>
   </div>
   <div class="hero-right" aria-hidden="true">
