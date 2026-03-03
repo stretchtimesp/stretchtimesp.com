@@ -772,33 +772,25 @@
     const dotsContainer = document.getElementById('galleryDots');
     const progressBar = document.getElementById('progressBar');
     const TOTAL = slides.length;
-    const AUTO_INTERVAL = 2000; // ms per slide
+    const AUTO_INTERVAL = 2000;
     let current = 0;
     let autoTimer = null;
-    let progressTimer = null;
 
-    // Build dots
+    // Build dots using spans to avoid any button/form submit behavior
     for (let i = 0; i < TOTAL; i++) {
-      const dot = document.createElement('button');
+      const dot = document.createElement('span');
       dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
       dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      dot.addEventListener('click', () => goTo(i));
+      dot.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); goTo(i); startAuto(); });
       dotsContainer.appendChild(dot);
     }
 
-    function getOffset() {
-      // Offset = margin-left of first slide + (slide width + gap) * current
-      const firstSlide = slides[0];
-      const style = window.getComputedStyle(firstSlide);
-      const slideW = firstSlide.offsetWidth + 10; // 10 = padding each side
-      const ml = parseInt(window.getComputedStyle(track.parentElement).paddingLeft) || 60;
-      return current * slideW;
-    }
-
     function goTo(index) {
-      current = (index + TOTAL) % TOTAL;
+      current = ((index % TOTAL) + TOTAL) % TOTAL;
       const slideW = slides[0].offsetWidth + 10;
-      track.style.transform = `translateX(-${current * slideW}px)`;
+      track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
       document.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === current));
       resetProgress();
     }
@@ -806,21 +798,37 @@
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    document.getElementById('galleryNext').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); next(); startAuto(); });
-    document.getElementById('galleryPrev').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); prev(); startAuto(); });
+    // Use onclick directly to avoid any event bubbling issues
+    document.getElementById('galleryNext').onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      clearAuto();
+      next();
+      startAuto();
+      return false;
+    };
+    document.getElementById('galleryPrev').onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      clearAuto();
+      prev();
+      startAuto();
+      return false;
+    };
 
     function resetProgress() {
       progressBar.style.transition = 'none';
       progressBar.style.width = '0%';
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          progressBar.style.transition = `width ${AUTO_INTERVAL}ms linear`;
+          progressBar.style.transition = 'width ' + AUTO_INTERVAL + 'ms linear';
           progressBar.style.width = '100%';
         });
       });
     }
 
     function startAuto() {
+      clearInterval(autoTimer);
       autoTimer = setInterval(next, AUTO_INTERVAL);
       resetProgress();
     }
@@ -831,21 +839,23 @@
       progressBar.style.width = '0%';
     }
 
-    // Pause on hover
+    // Pause on hover (desktop)
     const gallerySection = document.getElementById('gallery');
     gallerySection.addEventListener('mouseenter', clearAuto);
     gallerySection.addEventListener('mouseleave', startAuto);
 
     // Touch/swipe
     let touchStartX = 0;
-    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; clearAuto(); }, { passive: true });
-    track.addEventListener('touchend', e => {
+    track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e) {
       const dx = e.changedTouches[0].clientX - touchStartX;
-      if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
-      startAuto();
+      if (Math.abs(dx) > 40) {
+        clearAuto();
+        dx < 0 ? next() : prev();
+        startAuto();
+      }
     });
 
-    // Recalculate on resize
     window.addEventListener('resize', () => { goTo(current); }, { passive: true });
 
     startAuto();
