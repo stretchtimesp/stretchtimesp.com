@@ -98,9 +98,10 @@
       background: rgba(12,11,9,0.98); backdrop-filter: blur(16px);
       padding: 32px 24px 48px; flex-direction: column; z-index: 199;
       border-top: 1px solid rgba(201,145,58,0.1);
-      transform: translateY(-8px); opacity: 0; transition: transform 0.3s, opacity 0.3s; overflow-y: auto;
+      opacity: 0; transition: opacity 0.3s; overflow-y: auto;
+      pointer-events: none;
     }
-    .nav-drawer.open { transform: translateY(0); opacity: 1; }
+    .nav-drawer.open { opacity: 1; pointer-events: auto; }
     .nav-drawer a { display: block; padding: 18px 0; font-size: 0.88rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid rgba(201,145,58,0.08); transition: color 0.25s; }
     .nav-drawer a:hover { color: var(--cream); }
     .drawer-book-btn {
@@ -351,7 +352,7 @@
       nav { padding: 0 20px; background: rgba(12,11,9,0.95) !important; backdrop-filter: blur(12px); }
       .nav-links, .nav-book { display: none; }
       .nav-hamburger { display: flex; }
-      .nav-drawer { display: flex; }
+      .nav-drawer { display: flex; pointer-events: none; }
 
       .hero { grid-template-columns: 1fr; min-height: 100svh; position: relative; }
       .hero-left {
@@ -725,21 +726,25 @@
 </footer>
 
 <script>
-  // ── Nav scroll
+  // ══ NAV SCROLL ══
   const mainNav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => { mainNav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+  window.addEventListener('scroll', () => {
+    mainNav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
 
-  // ── Hamburger
+  // ══ HAMBURGER ══
   const hamburger = document.getElementById('hamburger');
   const drawer = document.getElementById('navDrawer');
+
   function closeDrawer() {
     hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded','false');
+    hamburger.setAttribute('aria-expanded', 'false');
     drawer.classList.remove('open');
-    drawer.setAttribute('aria-hidden','true');
+    drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
-  hamburger.addEventListener('click', () => {
+
+  hamburger.addEventListener('click', function() {
     const isOpen = hamburger.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', String(isOpen));
     drawer.classList.toggle('open', isOpen);
@@ -747,13 +752,15 @@
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  // ── Modal
+  // ══ BOOKING ══
+  // On mobile: open PocketSuite directly in new tab
+  // On desktop: open modal overlay
   const modal = document.getElementById('bookingModal');
   const modalBody = document.getElementById('modalBody');
   const modalLoading = document.getElementById('modalLoading');
   let iframeCreated = false;
+
   function openModal() {
-    // On mobile, open directly — iframe embedding is often blocked on mobile browsers
     if (window.innerWidth <= 768) {
       window.open('https://pocketsuite.io/book/stretch-time', '_blank');
       return;
@@ -765,16 +772,29 @@
       iframe.src = 'https://pocketsuite.io/book/stretch-time';
       iframe.className = 'modal-iframe';
       iframe.title = 'Book a Stretch Time session';
-      iframe.onload = () => { iframe.classList.add('loaded'); if (modalLoading) modalLoading.style.display = 'none'; };
+      iframe.onload = () => {
+        iframe.classList.add('loaded');
+        if (modalLoading) modalLoading.style.display = 'none';
+      };
       modalBody.appendChild(iframe);
       iframeCreated = true;
     }
   }
-  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; }
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeDrawer(); } });
 
-  // ── Gallery slideshow
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeModal(); closeDrawer(); }
+  });
+
+  // ══ GALLERY ══
   (function() {
     const track = document.getElementById('galleryTrack');
     const slides = track.querySelectorAll('.gallery-slide');
@@ -785,14 +805,14 @@
     let current = 0;
     let autoTimer = null;
 
-    // Build dots using spans to avoid any button/form submit behavior
+    // Build dots
     for (let i = 0; i < TOTAL; i++) {
       const dot = document.createElement('span');
       dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
-      dot.setAttribute('role', 'button');
-      dot.setAttribute('tabindex', '0');
-      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      dot.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); goTo(i); startAuto(); });
+      dot.style.cursor = 'pointer';
+      dot.addEventListener('click', (function(idx) {
+        return function() { clearAuto(); goTo(idx); startAuto(); };
+      })(i));
       dotsContainer.appendChild(dot);
     }
 
@@ -800,41 +820,26 @@
       current = ((index % TOTAL) + TOTAL) % TOTAL;
       const slideW = slides[0].offsetWidth + 10;
       track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
-      document.querySelectorAll('.gallery-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      document.querySelectorAll('.gallery-dot').forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
       resetProgress();
     }
 
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    // Use onclick directly to avoid any event bubbling issues
+    // Arrow buttons — desktop only (hidden on mobile via CSS)
     const btnNext = document.getElementById('galleryNext');
     const btnPrev = document.getElementById('galleryPrev');
-
-    // Use touchend to avoid iOS scroll-to-focus behavior; blur immediately after
-    btnNext.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.blur();
-      clearAuto(); next(); startAuto();
-    }, { passive: false });
-
-    btnPrev.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.blur();
-      clearAuto(); prev(); startAuto();
-    }, { passive: false });
-
-    // Desktop click
     btnNext.addEventListener('click', function(e) { e.preventDefault(); clearAuto(); next(); startAuto(); });
     btnPrev.addEventListener('click', function(e) { e.preventDefault(); clearAuto(); prev(); startAuto(); });
 
     function resetProgress() {
       progressBar.style.transition = 'none';
       progressBar.style.width = '0%';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
           progressBar.style.transition = 'width ' + AUTO_INTERVAL + 'ms linear';
           progressBar.style.width = '100%';
         });
@@ -858,35 +863,54 @@
     gallerySection.addEventListener('mouseenter', clearAuto);
     gallerySection.addEventListener('mouseleave', startAuto);
 
-    // Touch/swipe
+    // Swipe on mobile — only horizontal swipes, ignore vertical scrolling
     let touchStartX = 0;
-    track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    let touchStartY = 0;
+    let isSwiping = false;
+
+    track.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isSwiping = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function(e) {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY);
+      if (dx > dy && dx > 10) {
+        isSwiping = true;
+        e.preventDefault(); // prevent page scroll during horizontal swipe
+      }
+    }, { passive: false });
+
     track.addEventListener('touchend', function(e) {
+      if (!isSwiping) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) {
         clearAuto();
         dx < 0 ? next() : prev();
         startAuto();
       }
-    });
+      isSwiping = false;
+    }, { passive: true });
 
-    window.addEventListener('resize', () => { goTo(current); }, { passive: true });
+    window.addEventListener('resize', function() { goTo(current); }, { passive: true });
 
     startAuto();
   })();
 
-  // ── Fade in on scroll
+  // ══ FADE IN ══
   const faders = document.querySelectorAll('.fade-in');
-  const fadeObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
+  const fadeObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
-        const delay = Array.from(faders).indexOf(entry.target) % 3 * 90;
-        setTimeout(() => entry.target.classList.add('visible'), delay);
+        var idx = Array.from(faders).indexOf(entry.target) % 3;
+        setTimeout(function() { entry.target.classList.add('visible'); }, idx * 90);
         fadeObs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
-  faders.forEach(el => fadeObs.observe(el));
+  faders.forEach(function(el) { fadeObs.observe(el); });
 </script>
 </body>
 </html>
