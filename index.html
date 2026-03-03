@@ -305,6 +305,29 @@
     .review-name { font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 
     /* ── BOOKING CTA ── */
+    /* PRICING */
+    .pricing { padding: 50px 60px; background: var(--dark2); }
+    .pricing-header { text-align: center; margin-bottom: 48px; }
+    .pricing-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+    .pricing-heading em { font-style: italic; color: var(--amber-light); }
+    .pricing-sub { font-size: 0.88rem; color: var(--text-muted); font-weight: 300; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
+    .pricing-card { background: var(--dark); padding: 36px 28px; display: flex; flex-direction: column; position: relative; }
+    .pricing-card.featured { background: rgba(201,145,58,0.06); outline: 1px solid rgba(201,145,58,0.25); }
+    .pricing-badge { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .pricing-badge::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
+    .pricing-duration { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1; color: var(--cream); margin-bottom: 4px; }
+    .pricing-price span { font-size: 1.2rem; vertical-align: super; }
+    .pricing-per { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 16px; min-height: 18px; }
+    .pricing-per strong { color: var(--amber); }
+    .pricing-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 24px; }
+    .pricing-cta { display: block; text-align: center; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 500; font-family: 'DM Sans', sans-serif; padding: 13px; border: 1px solid rgba(201,145,58,0.35); color: var(--amber); background: none; cursor: pointer; transition: all 0.25s; }
+    .pricing-cta:hover { background: var(--amber); color: var(--black); }
+    .pricing-card.featured .pricing-cta { background: var(--amber); color: var(--black); border-color: var(--amber); }
+    .pricing-card.featured .pricing-cta:hover { background: var(--amber-light); }
+    .pricing-note { text-align: center; margin-top: 24px; font-size: 0.72rem; color: var(--text-dim); }
+
     .booking { padding: 60px 60px; text-align: center; background: var(--black); position: relative; overflow: hidden; }
     .booking::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,145,58,0.07) 0%, transparent 70%); pointer-events: none; }
     .booking > * { position: relative; }
@@ -415,6 +438,8 @@
       .review-card.featured { grid-column: span 1; }
       .review-card { padding: 34px 26px; }
 
+      .pricing { padding: 44px 24px; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .booking { padding: 48px 24px; }
       .booking-meta { flex-direction: column; align-items: flex-start; padding-left: 4px; gap: 12px; }
       .booking .btn-primary { width: 100%; text-align: center; padding: 18px; }
@@ -709,6 +734,48 @@
       <div class="review-author"><div class="review-avatar">A</div><div><div class="review-stars">★★★★★</div><div class="review-name">Alyssa F.</div></div></div>
     </div>
   </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <div class="section-label-center" style="margin-bottom:16px;">Investment</div>
+    <h2 class="pricing-heading">Simple, <em>transparent pricing.</em></h2>
+    <p class="pricing-sub">Roberto comes to you. No travel fees, no hidden costs.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card fade-in">
+      <div class="pricing-duration">Single Session</div>
+      <div class="pricing-price"><span>$</span>70</div>
+      <div class="pricing-per">30 minutes</div>
+      <p class="pricing-desc">A focused session targeting specific areas of tension. Ideal for a quick reset or first-time clients.</p>
+      <button class="pricing-cta" onclick="openModal()">Book Now</button>
+    </div>
+    <div class="pricing-card fade-in">
+      <div class="pricing-duration">Single Session</div>
+      <div class="pricing-price"><span>$</span>100</div>
+      <div class="pricing-per">60 minutes</div>
+      <p class="pricing-desc">A full-body session covering all major muscle groups. The most popular starting point for new clients.</p>
+      <button class="pricing-cta" onclick="openModal()">Book Now</button>
+    </div>
+    <div class="pricing-card fade-in">
+      <div class="pricing-badge">Best Value</div>
+      <div class="pricing-duration">8-Pack</div>
+      <div class="pricing-price"><span>$</span>480</div>
+      <div class="pricing-per"><strong>$60/session &mdash; save $80</strong></div>
+      <p class="pricing-desc">Eight 30-minute sessions to build lasting mobility. The smart way to commit to feeling better.</p>
+      <button class="pricing-cta" onclick="openModal()">Book Now</button>
+    </div>
+    <div class="pricing-card featured fade-in">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-duration">8-Pack</div>
+      <div class="pricing-price"><span>$</span>720</div>
+      <div class="pricing-per"><strong>$90/session &mdash; save $80</strong></div>
+      <p class="pricing-desc">Eight 60-minute sessions for real, measurable results. Roberto's most committed clients choose this.</p>
+      <button class="pricing-cta" onclick="openModal()">Book Now</button>
+    </div>
+  </div>
+  <p class="pricing-note">All packages expire 3 months from purchase &middot; Additional options available at checkout</p>
 </section>
 
 <!-- BOOKING -->
