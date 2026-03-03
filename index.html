@@ -138,7 +138,7 @@
     .btn-ghost:hover { color: var(--cream); }
 
     /* ── HERO ── */
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: var(--nav-h); }
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: var(--nav-h); padding-bottom: 0; }
     .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; z-index: 2; }
     .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
     .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--amber); }
@@ -160,18 +160,9 @@
                   linear-gradient(to top, rgba(12,11,9,0.6) 0%, transparent 40%);
     }
     .hero-stats { position: absolute; bottom: 80px; right: 50px; display: flex; flex-direction: column; gap: 28px; z-index: 3; }
-    .hero-stat {
-      text-align: right;
-      background: rgba(12,11,9,0.55);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 12px 18px;
-      border-right: 2px solid rgba(201,145,58,0.5);
-    }
-    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--amber-light); line-height: 1; }
-    .stat-label { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(249,244,236,0.6); margin-top: 4px; }
-    .scroll-hint { position: absolute; bottom: 32px; left: 60px; display: flex; align-items: center; gap: 12px; font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); animation: pulse 2.5s ease-in-out infinite; }
-    .scroll-hint::before { content: ''; display: block; width: 1px; height: 44px; background: linear-gradient(to bottom, var(--amber), transparent); }
+    .hero-stat { text-align: right; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--amber-light); line-height: 1; text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.7); }
+    .stat-label { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(249,244,236,0.6); margin-top: 4px; text-shadow: 0 1px 8px rgba(0,0,0,0.95); }
     @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:0.9} }
 
     /* ── CREDS TICKER ── */
@@ -386,7 +377,6 @@
         background: none;
         pointer-events: none;
       }
-      .scroll-hint { display: none; }
       .hero-stats { display: none; }
 
       .creds-strip { padding: 0 16px; }
@@ -504,7 +494,6 @@
       <div class="hero-stat"><div class="stat-num">5.0</div><div class="stat-label">Google rating</div></div>
     </div>
   </div>
-  <div class="scroll-hint" aria-hidden="true">Scroll to explore</div>
 </section>
 
 <!-- CREDENTIALS TICKER -->
