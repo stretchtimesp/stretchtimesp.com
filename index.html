@@ -383,9 +383,10 @@
       .about-portrait { aspect-ratio: 1/1; }
       .about .btn-primary { width: 100%; text-align: center; }
 
-      .gallery-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .gallery-header { padding: 0 24px; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
       .gallery-heading { font-size: 2rem; }
-      .gallery-controls { align-self: flex-start; }
+      .gallery-controls { align-self: center; }
+      .gallery-header .section-label { justify-content: center; }
       .gallery-slide { width: 85vw; }
       .gallery-slide:first-child { margin-left: 24px; }
       .gallery-progress { margin: 24px 24px 0; }
@@ -540,9 +541,9 @@
       <h2 class="gallery-heading">Every session,<br><em>delivered to you.</em></h2>
     </div>
     <div class="gallery-controls">
-      <button class="gallery-btn" id="galleryPrev" aria-label="Previous photo">&#8592;</button>
+      <button type="button" class="gallery-btn" id="galleryPrev" aria-label="Previous photo">&#8592;</button>
       <div class="gallery-dots" id="galleryDots"></div>
-      <button class="gallery-btn" id="galleryNext" aria-label="Next photo">&#8594;</button>
+      <button type="button" class="gallery-btn" id="galleryNext" aria-label="Next photo">&#8594;</button>
     </div>
   </div>
 
@@ -805,8 +806,8 @@
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    document.getElementById('galleryNext').addEventListener('click', () => { clearAuto(); next(); startAuto(); });
-    document.getElementById('galleryPrev').addEventListener('click', () => { clearAuto(); prev(); startAuto(); });
+    document.getElementById('galleryNext').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); next(); startAuto(); });
+    document.getElementById('galleryPrev').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); clearAuto(); prev(); startAuto(); });
 
     function resetProgress() {
       progressBar.style.transition = 'none';
