@@ -799,22 +799,17 @@
     function prev() { goTo(current - 1); }
 
     // Use onclick directly to avoid any event bubbling issues
-    document.getElementById('galleryNext').onclick = function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      clearAuto();
-      next();
-      startAuto();
-      return false;
-    };
-    document.getElementById('galleryPrev').onclick = function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      clearAuto();
-      prev();
-      startAuto();
-      return false;
-    };
+    // Handle both touch and click to prevent iOS scroll jump
+    function handleNext(e) { e.preventDefault(); e.stopPropagation(); clearAuto(); next(); startAuto(); return false; }
+    function handlePrev(e) { e.preventDefault(); e.stopPropagation(); clearAuto(); prev(); startAuto(); return false; }
+
+    const btnNext = document.getElementById('galleryNext');
+    const btnPrev = document.getElementById('galleryPrev');
+
+    btnNext.addEventListener('touchstart', handleNext, { passive: false });
+    btnNext.addEventListener('click', handleNext);
+    btnPrev.addEventListener('touchstart', handlePrev, { passive: false });
+    btnPrev.addEventListener('click', handlePrev);
 
     function resetProgress() {
       progressBar.style.transition = 'none';
