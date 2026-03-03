@@ -750,6 +750,11 @@
   const modalLoading = document.getElementById('modalLoading');
   let iframeCreated = false;
   function openModal() {
+    // On mobile, open directly — iframe embedding is often blocked on mobile browsers
+    if (window.innerWidth <= 768) {
+      window.open('https://pocketsuite.io/book/stretch-time', '_blank');
+      return;
+    }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     if (!iframeCreated) {
