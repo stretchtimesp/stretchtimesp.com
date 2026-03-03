@@ -360,7 +360,7 @@
       .nav-hamburger { display: flex; }
       .nav-drawer { display: flex; pointer-events: none; }
 
-      .hero { grid-template-columns: 1fr; min-height: 0; height: auto; position: relative; }
+      .hero { grid-template-columns: 1fr; min-height: 0; height: auto; position: relative; overflow: hidden; }
       .hero-left {
         padding: 24px 24px 52px; justify-content: flex-end;
         position: relative; z-index: 5;
@@ -370,7 +370,7 @@
       .hero-sub { max-width: 100%; }
       .hero-cta { flex-direction: column; align-items: stretch; gap: 14px; }
       .hero-cta .btn-primary { text-align: center; padding: 18px; }
-      .hero-cta .btn-ghost { justify-content: center; }
+      .hero-cta .btn-ghost { justify-content: center; text-align: center; width: 100%; display: flex; }
       /* Show image as full-bleed background on mobile */
       .hero-right {
         display: block;
