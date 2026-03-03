@@ -421,9 +421,11 @@
       .booking-meta { flex-direction: column; align-items: flex-start; padding-left: 4px; gap: 12px; }
       .booking .btn-primary { width: 100%; text-align: center; padding: 18px; }
 
-      footer { flex-direction: column; align-items: center; padding: 36px 24px; text-align: center; }
-      .footer-right { text-align: center; }
-      .footer-contact { order: -1; }
+      footer { display: flex; flex-direction: column; align-items: center; padding: 36px 24px; text-align: center; gap: 20px; }
+      .footer-logo { justify-self: center; }
+      .footer-contact { order: 0; text-align: center; }
+      .footer-right { text-align: center; justify-self: center; }
+      .footer-area, .footer-hours { text-align: center; }
     }
 
     @media (max-width: 420px) {
@@ -736,7 +738,7 @@
     <div class="footer-area">Fort Lauderdale, FL & Surrounding Areas</div>
     <div class="footer-hours">Monday – Saturday · 7AM – 7PM</div>
   </div>
-  <div class="footer-copy">© 2025 Stretch Time LLC · Fort Lauderdale, FL · All rights reserved.</div>
+  <div class="footer-copy">© 2026 Stretch Time LLC · Fort Lauderdale, FL · All rights reserved.</div>
 </footer>
 
 <script>
