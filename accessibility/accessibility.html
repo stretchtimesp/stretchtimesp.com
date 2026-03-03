@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility · Stretch Time</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: hidden; }
+    :root { --black: #0c0b09; --amber: #c9913a; --amber-light: #e8b86d; --cream: #f9f4ec; --text-muted: rgba(249,244,236,0.6); --text-dim: rgba(249,244,236,0.35); }
+    body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--cream); line-height: 1.8; }
+    nav { position: fixed; top: 0; left: 0; right: 0; height: 64px; background: rgba(12,11,9,0.97); border-bottom: 1px solid rgba(201,145,58,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 100; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber-light); text-decoration: none; }
+    .nav-back { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.25s; }
+    .nav-back:hover { color: var(--amber); }
+    .container { max-width: 760px; margin: 0 auto; padding: 120px 40px 80px; }
+    .page-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+    .page-label::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+    .updated { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 48px; }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: var(--amber-light); margin: 40px 0 12px; }
+    p { font-size: 0.9rem; font-weight: 300; color: var(--text-muted); margin-bottom: 16px; }
+    ul { padding-left: 20px; margin-bottom: 16px; }
+    ul li { font-size: 0.9rem; font-weight: 300; color: var(--text-muted); margin-bottom: 8px; }
+    a { color: var(--amber); text-decoration: none; }
+    a:hover { color: var(--amber-light); }
+    hr { border: none; border-top: 1px solid rgba(201,145,58,0.1); margin: 48px 0; }
+    footer { text-align: center; padding: 40px; font-size: 0.64rem; color: var(--text-dim); border-top: 1px solid rgba(201,145,58,0.06); }
+    footer a { color: var(--text-dim); margin: 0 12px; }
+    footer a:hover { color: var(--amber); }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">Stretch Time</a>
+  <a href="/" class="nav-back">&#8592; Back to Site</a>
+</nav>
+<div class="container">
+  <div class="page-label">Accessibility</div>
+  <h1>Accessibility Statement</h1>
+  <p class="updated">Last updated: March 2026</p>
+  <p>Stretch Time LLC is committed to ensuring our website is accessible to everyone, including people with disabilities. We believe equal access to information about our services is a right, not an afterthought.</p>
+  <h2>Our Commitment</h2>
+  <p>We strive to meet the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards, which help make web content accessible to people with a wide range of disabilities including visual, auditory, cognitive, and motor impairments.</p>
+  <h2>What We Have Done</h2>
+  <p>Steps we have taken to improve accessibility on this site:</p>
+  <ul>
+    <li>Descriptive alt text on all images so screen readers can convey visual content</li>
+    <li>Semantic HTML structure with a logical heading hierarchy</li>
+    <li>Keyboard-navigable interface — all interactive elements are accessible without a mouse</li>
+    <li>Sufficient color contrast between text and background elements</li>
+    <li>Fully responsive design that works across all devices and screen sizes</li>
+    <li>ARIA labels on navigation buttons and interactive elements</li>
+    <li>No flashing or strobing content that could trigger photosensitive conditions</li>
+  </ul>
+  <h2>Known Limitations</h2>
+  <p>We are continuously working to improve. Areas we are actively reviewing include:</p>
+  <ul>
+    <li>Third-party booking and payment tools (PocketSuite) are operated by a third party and may have their own accessibility limitations outside our control</li>
+    <li>Ongoing review of decorative element contrast ratios</li>
+  </ul>
+  <h2>Physical Accessibility</h2>
+  <p>Stretch Time is a fully mobile service — Roberto comes to you. Sessions can be held in your home or any location of your choosing, which may be significantly more accessible than a traditional studio or clinic. We warmly welcome clients with mobility limitations, physical disabilities, or any special requirements. Please contact us in advance so we can ensure your session is comfortable, safe, and fully tailored to your needs.</p>
+  <h2>Need Assistance?</h2>
+  <p>If you experience any difficulty accessing content on our website, or if you need information in an alternative format, please reach out. We will respond promptly.</p>
+  <p>Stretch Time LLC &middot; Fort Lauderdale, FL<br>
+  <a href="mailto:stretchtimesp@gmail.com">stretchtimesp@gmail.com</a> &middot; <a href="tel:4149461037">(414) 946-1037</a></p>
+  <h2>Feedback</h2>
+  <p>We welcome feedback on the accessibility of our website. If you encounter barriers or have suggestions for improvement, please let us know. Your input helps us serve everyone better.</p>
+  <hr>
+</div>
+<footer>
+  <div style="margin-bottom:12px;">
+    <a href="/">Home</a>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/terms/">Terms of Service</a>
+    <a href="/accessibility/">Accessibility</a>
+  </div>
+  &copy; 2026 Stretch Time LLC &middot; Fort Lauderdale, FL &middot; All rights reserved.
+</footer>
+</body>
+</html>
