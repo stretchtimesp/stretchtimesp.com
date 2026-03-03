@@ -314,10 +314,10 @@
     .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
     .pricing-card { background: var(--dark); padding: 36px 28px; display: flex; flex-direction: column; position: relative; }
     .pricing-card.featured { background: rgba(201,145,58,0.06); outline: 1px solid rgba(201,145,58,0.25); }
-    .pricing-badge { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .pricing-badge { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
     .pricing-badge::before { content: ''; width: 20px; height: 1px; background: var(--amber); }
     .pricing-duration { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
-    .pricing-price { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; line-height: 1; color: var(--cream); margin-bottom: 4px; }
+    .pricing-price { font-family: 'DM Sans', sans-serif; font-size: 3rem; font-weight: 200; line-height: 1; color: var(--cream); margin-bottom: 4px; }
     .pricing-price span { font-size: 1.2rem; vertical-align: super; }
     .pricing-per { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 16px; min-height: 18px; }
     .pricing-per strong { color: var(--amber); }
@@ -487,6 +487,7 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#services">Benefits</a></li>
     <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#book">Contact</a></li>
   </ul>
   <button class="nav-book" onclick="openModal()">Book a Session</button>
@@ -499,6 +500,7 @@
   <a href="#gallery" onclick="closeDrawer()">Gallery</a>
   <a href="#services" onclick="closeDrawer()">Benefits</a>
   <a href="#reviews" onclick="closeDrawer()">Reviews</a>
+  <a href="#pricing" onclick="closeDrawer()">Pricing</a>
   <a href="#book" onclick="closeDrawer()">Contact</a>
   <button class="drawer-book-btn" onclick="closeDrawer(); openModal();">Book a Session</button>
 </div>
