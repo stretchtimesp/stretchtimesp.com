@@ -353,14 +353,27 @@
       .nav-hamburger { display: flex; }
       .nav-drawer { display: flex; }
 
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 52px 24px 64px; justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; min-height: 100svh; position: relative; }
+      .hero-left {
+        padding: 52px 24px 72px; justify-content: flex-end;
+        position: relative; z-index: 2;
+        background: linear-gradient(to top, rgba(12,11,9,0.92) 0%, rgba(12,11,9,0.5) 60%, rgba(12,11,9,0.3) 100%);
+      }
       .hero-sub { max-width: 100%; }
       .hero-cta { flex-direction: column; align-items: stretch; gap: 14px; }
       .hero-cta .btn-primary { text-align: center; padding: 18px; }
       .hero-cta .btn-ghost { justify-content: center; }
-      .hero-right { display: none; }
+      /* Show image as full-bleed background on mobile */
+      .hero-right {
+        display: block;
+        position: absolute; inset: 0; z-index: 0;
+      }
+      .hero-photo { background-position: center 20%; }
+      .hero-photo-overlay {
+        background: none;
+      }
       .scroll-hint { display: none; }
+      .hero-stats { display: none; }
 
       .creds-strip { padding: 0 16px; }
       .cred-item { padding: 16px 18px; }
