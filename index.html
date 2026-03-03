@@ -166,11 +166,34 @@
     .scroll-hint::before { content: ''; display: block; width: 1px; height: 44px; background: linear-gradient(to bottom, var(--amber), transparent); }
     @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:0.9} }
 
-    /* ── CREDS STRIP ── */
-    .creds-strip { background: var(--dark2); border-top: 1px solid rgba(201,145,58,0.12); border-bottom: 1px solid rgba(201,145,58,0.12); padding: 0 60px; display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; }
-    .creds-strip::-webkit-scrollbar { display: none; }
-    .cred-item { display: flex; align-items: center; gap: 12px; padding: 20px 36px; border-right: 1px solid rgba(201,145,58,0.1); white-space: nowrap; flex-shrink: 0; }
-    .cred-item:last-child { border-right: none; }
+    /* ── CREDS TICKER ── */
+    .creds-strip {
+      background: var(--dark2);
+      border-top: 1px solid rgba(201,145,58,0.12);
+      border-bottom: 1px solid rgba(201,145,58,0.12);
+      overflow: hidden; position: relative;
+    }
+    .creds-strip::before, .creds-strip::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+    }
+    .creds-strip::before { left: 0; background: linear-gradient(to right, var(--dark2), transparent); }
+    .creds-strip::after  { right: 0; background: linear-gradient(to left, var(--dark2), transparent); }
+    .creds-track {
+      display: flex; align-items: center;
+      animation: ticker 28s linear infinite;
+      width: max-content;
+    }
+    .creds-strip:hover .creds-track { animation-play-state: paused; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .cred-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 20px 44px;
+      border-right: 1px solid rgba(201,145,58,0.1);
+      white-space: nowrap; flex-shrink: 0;
+    }
     .cred-text { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 
     /* ── SECTION LABEL ── */
@@ -450,14 +473,22 @@
   <div class="scroll-hint" aria-hidden="true">Scroll to explore</div>
 </section>
 
-<!-- CREDENTIALS STRIP -->
-<div class="creds-strip">
+<!-- CREDENTIALS TICKER -->
+<div class="creds-strip" aria-hidden="true">
+  <div class="creds-track">
   <div class="cred-item"><span>🏆</span><span class="cred-text">Tony Award — King Kong on Broadway</span></div>
   <div class="cred-item"><span>⭐</span><span class="cred-text">Chita Rivera Award</span></div>
   <div class="cred-item"><span>🎖</span><span class="cred-text">U.S. Army Reserve · Combat Medic</span></div>
   <div class="cred-item"><span>📋</span><span class="cred-text">NASM Certified Trainer</span></div>
   <div class="cred-item"><span>💆</span><span class="cred-text">NCBTMB Certified</span></div>
   <div class="cred-item"><span>⭐</span><span class="cred-text">5.0 · 21 Google Reviews</span></div>
+  <div class="cred-item"><span>🏆</span><span class="cred-text">Tony Award — King Kong on Broadway</span></div>
+  <div class="cred-item"><span>⭐</span><span class="cred-text">Chita Rivera Award</span></div>
+  <div class="cred-item"><span>🎖</span><span class="cred-text">U.S. Army Reserve · Combat Medic</span></div>
+  <div class="cred-item"><span>📋</span><span class="cred-text">NASM Certified Trainer</span></div>
+  <div class="cred-item"><span>💆</span><span class="cred-text">NCBTMB Certified</span></div>
+  <div class="cred-item"><span>⭐</span><span class="cred-text">5.0 · 21 Google Reviews</span></div>
+  </div>
 </div>
 
 <!-- ABOUT -->
