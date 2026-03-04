@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stretch Time | Mobile Assisted Stretching Fort Lauderdale</title>
   <meta name="description" content="Expert mobile assisted stretching delivered to your home in Fort Lauderdale. Roberto Olvera — Tony Award winner, Army combat medic & NASM-certified trainer. Book online today.">
-  <meta name="keywords" content="assisted stretching Fort Lauderdale, mobile stretch practitioner, in-home stretching South Florida, PNF stretching Fort Lauderdale, flexibility training Broward County, stretch therapy near me">
   <meta name="author" content="Roberto Olvera — Stretch Time">
   <link rel="canonical" href="https://www.stretchtimesp.com/">
   <meta property="og:type" content="website">
@@ -116,14 +115,13 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { overflow-x: hidden; }
+    html { overflow-x: hidden; scroll-behavior: smooth; }
     :root {
       --black: #0c0b09; --dark: #141210; --dark2: #1c1a16;
       --amber: #c9913a; --amber-light: #e4b86a;
       --cream: #f9f4ec; --text-muted: #8a8070; --text-dim: #5a5448;
       --nav-h: 72px;
     }
-    html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--black); color: var(--cream); overflow-x: hidden; }
 
     /* ── NAV ── */
@@ -200,7 +198,7 @@
     .btn-ghost:hover { color: var(--cream); }
 
     /* ── HERO ── */
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: var(--nav-h); padding-bottom: 0; }
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; padding-top: var(--nav-h); }
     .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; z-index: 2; }
     .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--amber); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
     .hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--amber); }
@@ -221,10 +219,9 @@
       background: linear-gradient(to right, var(--black) 0%, rgba(12,11,9,0.3) 40%, rgba(12,11,9,0.55) 70%, rgba(12,11,9,0.72) 100%),
                   linear-gradient(to top, rgba(12,11,9,0.6) 0%, transparent 40%);
     }
-    .hero-stats { position: absolute; top: 0; bottom: 0; right: 50px; display: flex; flex-direction: column; justify-content: space-evenly; gap: 0; z-index: 3; padding: 120px 0; }
-    .hero-stat { padding: 22px 0; border-bottom: 1px solid rgba(201,145,58,0.15); }
+    .hero-stats { position: absolute; top: 0; bottom: 0; right: 50px; display: flex; flex-direction: column; justify-content: space-evenly; z-index: 3; padding: 120px 0; }
+    .hero-stat { padding: 22px 0; border-bottom: 1px solid rgba(201,145,58,0.15); text-align: right; }
     .hero-stat:last-child { border-bottom: none; }
-    .hero-stat { text-align: right; }
     .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 500; color: #f0cc7a; line-height: 1; text-shadow: 0 2px 16px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.9); }
     .stat-label { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(249,244,236,0.9); margin-top: 4px; text-shadow: 0 1px 8px rgba(0,0,0,1); }
 
@@ -366,8 +363,7 @@
     .review-stars { color: var(--amber); font-size: 0.62rem; letter-spacing: 2px; margin-bottom: 4px; }
     .review-name { font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
 
-    /* ── BOOKING CTA ── */
-    /* PRICING */
+    /* ── PRICING ── */
     .pricing { padding: 30px 60px 50px; background: var(--dark2); }
     .pricing-header { text-align: center; margin-bottom: 48px; }
     .pricing-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
@@ -389,7 +385,6 @@
     .pricing-card.featured .pricing-cta { background: var(--amber); color: var(--black); border-color: var(--amber); }
     .pricing-card.featured .pricing-cta:hover { background: var(--amber-light); }
     .pricing-note { text-align: center; margin-top: 24px; font-size: 0.72rem; color: var(--text-dim); }
-    .pricing-br { display: none; }
 
     .booking { padding: 60px 60px; text-align: center; background: var(--black); position: relative; overflow: hidden; }
     .booking::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,145,58,0.07) 0%, transparent 70%); pointer-events: none; }
@@ -452,8 +447,8 @@
       }
       .hero-sub { max-width: 100%; }
       .hero-cta { flex-direction: column; align-items: stretch; gap: 14px; }
-      .hero-cta .btn-primary { display: block; width: 100%; text-align: center; padding: 18px; box-sizing: border-box; }
-      .hero-cta .btn-ghost { display: block !important; width: 100%; text-align: center !important; padding: 8px 0 8px 6px; box-sizing: border-box; }
+      .hero-cta .btn-primary { display: block; width: 100%; text-align: center; padding: 18px; }
+      .hero-cta .btn-ghost { display: block !important; width: 100%; text-align: center !important; padding: 8px 0 8px 6px; }
       /* Show image as full-bleed background on mobile */
       .hero-right {
         display: block;
@@ -806,7 +801,7 @@
   <div class="pricing-header">
     <div class="section-label-center" style="margin-bottom:16px;">Investment</div>
     <h2 class="pricing-heading">Simple, <em>transparent pricing.</em></h2>
-    <p class="pricing-sub">Roberto comes to you. No travel fees, <span class="pricing-br"><br></span>no hidden costs.</p>
+    <p class="pricing-sub">Roberto comes to you. No travel fees, no hidden costs.</p>
   </div>
   <div class="pricing-grid">
     <div class="pricing-card fade-in">
@@ -837,7 +832,7 @@
       <div class="pricing-badge">Most Popular</div>
       <div class="pricing-duration">8-Pack</div>
       <div class="pricing-price"><span>$</span>720</div>
-      <div class="pricing-per"><strong>$90/session &mdash; save $80</strong></div>
+      <div class="pricing-per"><strong>$90/session &mdash; <span style="white-space:nowrap;">save $80</span></strong></div>
       <p class="pricing-desc">Eight 60-minute sessions for real, measurable results. Roberto's most committed clients choose this.</p>
       <button class="pricing-cta" onclick="openModal()">Book Now</button>
     </div>
