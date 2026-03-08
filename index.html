@@ -911,7 +911,7 @@
   let iframeCreated = false;
 
   function openModal() {
-    if (window.innerWidth <= 1024) {
+    if ('ontouchstart' in window || window.innerWidth <= 1024) {
       window.open('https://pocketsuite.io/book/stretch-time', '_blank');
       return;
     }
